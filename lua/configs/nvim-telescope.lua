@@ -1,10 +1,11 @@
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
+
 require("telescope").setup({
-  pickers = { 
-    buffers = { 
+  pickers = {
+    buffers = {
       sort_mru = true,
       -- ignore_current_buffer = true,
-    }
+    },
   },
   defaults = {
     mappings = {
@@ -15,5 +16,5 @@ require("telescope").setup({
         ["<C-k>"] = actions.move_selection_previous,
       },
     },
-  }
+  },
 })

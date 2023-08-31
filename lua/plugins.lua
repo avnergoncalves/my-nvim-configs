@@ -5,7 +5,6 @@ local packer = require("packer")
 vim.cmd([[packadd packer.nvim]])
 
 packer.startup(function()
-
   -- plugins
   use("wbthomason/packer.nvim")
 
@@ -13,7 +12,7 @@ packer.startup(function()
   use("morhetz/gruvbox")
   use("tiagovla/tokyodark.nvim")
   use("ghifarit53/tokyonight-vim")
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use({ "catppuccin/nvim", as = "catppuccin" })
 
   -- finder
   use("nvim-telescope/telescope.nvim")
@@ -26,6 +25,7 @@ packer.startup(function()
   use("hrsh7th/nvim-cmp")
 
   -- snippets
+  use("rafamadriz/friendly-snippets")
   use("L3MON4D3/LuaSnip")
   use("saadparwaiz1/cmp_luasnip")
 
@@ -39,6 +39,7 @@ packer.startup(function()
 
   -- syntax
   use("nvim-treesitter/nvim-treesitter")
+  use("jwalton512/vim-blade")
 
   -- utilities
   use("windwp/nvim-autopairs")
@@ -61,31 +62,13 @@ packer.startup(function()
   use("nvim-lualine/lualine.nvim")
 
   -- session
-  use {
-    'rmagatti/auto-session',
+  use({
+    "rmagatti/auto-session",
     config = function()
-      require("auto-session").setup {
+      require("auto-session").setup({
         log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/Workspace", "~/Downloads", "/"},
-      }
-    end
-  }
-
+        auto_session_suppress_dirs = { "~/", "~/Workspace", "~/Downloads", "/" },
+      })
+    end,
+  })
 end)
-
-vim.cmd([[
-  filetype plugin indent on
-  syntax on
-  colorscheme gruvbox
-]])
-
-require("gitsigns").setup()
-require("colorizer").setup()
-require('marks').setup()
-require('nvim_comment').setup()
-
-
-require("nvim-autopairs").setup({
-	disable_filetype = { "TelescopePrompt" },
-})
-

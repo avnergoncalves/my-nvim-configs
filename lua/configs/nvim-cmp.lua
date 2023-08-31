@@ -1,5 +1,7 @@
 local cmp = require("cmp")
 
+require("luasnip.loaders.from_vscode").lazy_load()
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -7,10 +9,10 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+    ["<Tab>"] = cmp.mapping.select_next_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-e>"] = cmp.mapping.abort(),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),

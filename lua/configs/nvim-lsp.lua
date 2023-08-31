@@ -1,3 +1,8 @@
+require("mason").setup()
+require("mason-lspconfig").setup({
+  automatic_installation = true,
+})
+
 local lspconfig = require("lspconfig")
 local caps = vim.lsp.protocol.make_client_capabilities()
 local no_format = function(client, bufnr)
@@ -10,7 +15,7 @@ caps.textDocument.completion.completionItem.snippetSupport = true
 -- Python
 lspconfig.pyright.setup({
   capabilities = caps,
-  on_attach = no_format
+  on_attach = no_format,
 })
 
 -- PHP
@@ -19,30 +24,25 @@ lspconfig.phpactor.setup({ capabilities = caps })
 -- JavaScript/Typescript
 lspconfig.tsserver.setup({
   capabilities = caps,
-  on_attach = no_format
+  on_attach = no_format,
 })
 
 -- Rust
 lspconfig.rust_analyzer.setup({
   capabilities = snip_caps,
-  on_attach = no_format
+  on_attach = no_format,
 })
 
 -- Emmet
 lspconfig.emmet_ls.setup({
- capabilities = snip_caps,
- filetypes = {
-  "css",
-  "html",
-  "javascriptreact",
-  "less",
-  "sass",
-  "scss",
-  "typescriptreact",
- },
-})
-
-require("mason").setup()
-require("mason-lspconfig").setup({
-  automatic_installation = true
+  capabilities = snip_caps,
+  filetypes = {
+    "css",
+    "html",
+    "javascriptreact",
+    "less",
+    "sass",
+    "scss",
+    "typescriptreact",
+  },
 })

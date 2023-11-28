@@ -60,6 +60,8 @@ packer.startup(function()
   -- interface
   use("nvim-tree/nvim-tree.lua")
   use("nvim-lualine/lualine.nvim")
+  use("liuchengxu/vista.vim")
+  use("simrat39/symbols-outline.nvim")
 
   -- session
   use({

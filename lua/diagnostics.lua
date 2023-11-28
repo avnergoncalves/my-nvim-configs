@@ -18,5 +18,5 @@ vim.keymap.set("n", "<leader>e", function()
     return
   end
 
-  vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+  vim.diagnostic.open_float(nil, { focus = false, scope = "line" })
 end, { desc = "Toggle Diagnostics" })

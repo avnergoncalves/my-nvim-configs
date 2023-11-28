@@ -1,5 +1,13 @@
 vim.g.mapleader = " "
 
+-- settings
+vim.cmd([[
+  set noequalalways
+  filetype plugin indent on
+  syntax on
+  colorscheme gruvbox
+]])
+
 -- strip whitespace
 vim.g.better_whitespace_enabled = 0
 vim.g.strip_whitespace_on_save = 1

@@ -4,13 +4,6 @@ local cmd = vim.cmd
 
 local opts = { noremap = true, silent = true }
 
--- settings
-vim.cmd([[
-  filetype plugin indent on
-  syntax on
-  colorscheme gruvbox
-]])
-
 -- save, save/quit, and esc
 cmd([[
   nnoremap <silent> <C-s> :w<CR>
@@ -34,6 +27,7 @@ kmap("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
 -- Telescope
 local builtin = require("telescope.builtin")
+kmap("n", "<leader>d", builtin.diagnostics, opts)
 kmap("n", "<leader>f", builtin.find_files, opts)
 kmap("n", "<leader>g", builtin.live_grep, opts)
 kmap("n", "<leader>b", builtin.buffers, opts)

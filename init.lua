@@ -13,6 +13,8 @@ require("configs.nvim-autopairs")
 require("configs.nvim-cmp")
 require("configs.nvim-null-ls")
 require("configs.nvim-treesitter")
+require("configs.nvim-vista")
+require("configs.nvim-symbols-outline")
 
 require("diagnostics")
 require("keymaps")

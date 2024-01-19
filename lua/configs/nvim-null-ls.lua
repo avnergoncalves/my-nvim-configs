@@ -3,8 +3,9 @@ local lint = require("null-ls").builtins.diagnostics
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
-  -- debug = true,
+  debug = true,
   sources = {
+    formatting.isort,
     formatting.black,
     formatting.rustfmt,
     formatting.phpcsfixer,
@@ -12,7 +13,7 @@ require("null-ls").setup({
     formatting.prettierd,
     formatting.stylua,
 
-    lint.shellcheck,
+    -- lint.shellcheck,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then

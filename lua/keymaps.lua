@@ -42,3 +42,14 @@ map("n", "<C-f>", ":NvimTreeFindFile<CR>", opts)
 map("n", "s", "<plug>(SubversiveSubstitute)", opts)
 map("x", "p", "<plug>(SubversiveSubstitute)", opts)
 map("x", "P", "<plug>(SubversiveSubstitute)", opts)
+
+-- LuaSnip
+local ls = require("luasnip")
+
+kmap({ "i", "s" }, "<C-L>", function()
+  ls.jump(1)
+end, { silent = true })
+
+kmap({ "i", "s" }, "<C-H>", function()
+  ls.jump(-1)
+end, { silent = true })

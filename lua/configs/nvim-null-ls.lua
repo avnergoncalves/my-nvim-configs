@@ -1,5 +1,6 @@
 local formatting = require("null-ls").builtins.formatting
 local lint = require("null-ls").builtins.diagnostics
+local completion = require("null-ls").builtins.completion
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
@@ -13,7 +14,7 @@ require("null-ls").setup({
     formatting.prettierd,
     formatting.stylua,
 
-    -- lint.shellcheck,
+    -- completion.spell,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then

@@ -22,7 +22,12 @@ packer.startup(function()
   use("hrsh7th/cmp-cmdline")
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-path")
+  use("f3fora/cmp-spell")
   use("hrsh7th/nvim-cmp")
+
+  -- AI
+  use("github/copilot.vim")
+  use("Exafunction/codeium.vim")
 
   -- snippets
   use("rafamadriz/friendly-snippets")
@@ -51,6 +56,7 @@ packer.startup(function()
   use("tpope/vim-surround")
   use("svermeulen/vim-subversive")
   use("tpope/vim-repeat")
+  use("tpope/vim-abolish")
 
   -- dependencies
   use("nvim-lua/plenary.nvim")

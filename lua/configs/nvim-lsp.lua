@@ -39,10 +39,11 @@ lspconfig.emmet_ls.setup({
   filetypes = {
     "css",
     "html",
-    "javascriptreact",
+    "blade",
     "less",
     "sass",
     "scss",
-    "typescriptreact",
+    -- "javascriptreact",
+    -- "typescriptreact",
   },
 })

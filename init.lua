@@ -18,6 +18,7 @@ require("configs.nvim-symbols-outline")
 require("configs.nvim-abolish")
 require("configs.nvim-codeium")
 require("configs.nvim-copilot")
+require("configs.nvim-venv-selector")
 
 require("diagnostics")
 require("keymaps")

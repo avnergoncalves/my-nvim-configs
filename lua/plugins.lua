@@ -57,6 +57,7 @@ packer.startup(function()
   use("svermeulen/vim-subversive")
   use("tpope/vim-repeat")
   use("tpope/vim-abolish")
+  use("linux-cultist/venv-selector.nvim")
 
   -- dependencies
   use("nvim-lua/plenary.nvim")

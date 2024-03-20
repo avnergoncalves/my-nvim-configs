@@ -9,6 +9,21 @@ local no_format = function(client, bufnr)
   client.resolved_capabilities.document_formatting = false
 end
 
+-- Pylsp
+-- lspconfig.pylsp.setup({
+--   cmd = {
+--     "docker",
+--     "compose",
+--     "-f",
+--     "docker-compose.yml",
+--     "exec",
+--     "-T",
+--     "backend",
+--     "pylsp",
+--   },
+--   root_dir = require("lspconfig/util").root_pattern(".git", vim.fn.getcwd()),
+-- })
+
 -- Capabilities
 caps.textDocument.completion.completionItem.snippetSupport = true
 

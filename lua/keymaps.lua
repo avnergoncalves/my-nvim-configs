@@ -5,10 +5,10 @@ local cmd = vim.cmd
 local opts = { noremap = true, silent = true }
 
 -- save, save/quit, and esc
-cmd([[
-  nnoremap <silent> <C-s> :w<CR>
-  nnoremap <silent> <C-Q> :wq<CR>
-]])
+-- cmd([[
+--   nnoremap <silent> <C-s> :w<CR>
+--   nnoremap <silent> <C-Q> :wq<CR>
+-- ]])
 
 -- Clean highlight search
 map("n", "<leader><space>", ":noh<cr>", opts)

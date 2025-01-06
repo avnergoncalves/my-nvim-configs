@@ -5,7 +5,6 @@ vim.cmd([[
   set noequalalways
   filetype plugin indent on
   syntax on
-  colorscheme gruvbox
 ]])
 
 -- spell

@@ -1,6 +1,7 @@
 require("options")
 require("plugins")
 
+require("configs.nvim-gruvbox")
 require("configs.nvim-lsp")
 require("configs.nvim-lualine")
 require("configs.nvim-tree")

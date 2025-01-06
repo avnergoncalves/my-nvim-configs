@@ -1,1 +1,15 @@
-vim.g.copilot_enabled = true
+-- vim.g.copilot_enabled = true
+
+-- require("copilot").setup({
+--   suggestion = {
+--     auto_trigger = true,
+--     keymap = {
+--       accept = "<Tab>",
+--       accept_word = false,
+--       accept_line = false,
+--       next = "<M-]>",
+--       prev = "<M-[>",
+--       dismiss = "<C-]>",
+--     },
+--   },
+-- })

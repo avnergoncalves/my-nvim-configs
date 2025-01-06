@@ -14,10 +14,10 @@ local opts = { noremap = true, silent = true }
 map("n", "<leader><space>", ":noh<cr>", opts)
 
 -- Move windows
-map("n", "<C-J>", "<C-W><C-J>", opts)
-map("n", "<C-K>", "<C-W><C-K>", opts)
-map("n", "<C-L>", "<C-W><C-L>", opts)
-map("n", "<C-H>", "<C-W><C-H>", opts)
+-- map("n", "<C-J>", "<C-W><C-J>", opts)
+-- map("n", "<C-K>", "<C-W><C-K>", opts)
+-- map("n", "<C-L>", "<C-W><C-L>", opts)
+-- map("n", "<C-H>", "<C-W><C-H>", opts)
 
 -- Diagnostic
 kmap("n", "[d", vim.diagnostic.goto_prev, opts)

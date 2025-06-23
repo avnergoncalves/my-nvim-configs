@@ -19,13 +19,13 @@ require("copilot").setup({
 
 require("CopilotChat").setup({
   -- See Configuration section for options
-  window = {
-    layout = "float",
-    relative = "cursor",
-    width = 1,
-    height = 0.4,
-    row = 1,
-  },
+  -- window = {
+  --   layout = "float",
+  --   relative = "cursor",
+  --   width = 1,
+  --   height = 0.4,
+  --   row = 1,
+  -- },
   prompts = {
     PR = {
       prompt = "Write pull request message for the change. Keep the title under 50 characters. Format as a markdown.",

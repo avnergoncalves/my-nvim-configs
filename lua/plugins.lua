@@ -81,6 +81,7 @@ require("lazy").setup({
   "windwp/nvim-autopairs",
   "norcalli/nvim-colorizer.lua",
   "lewis6991/gitsigns.nvim",
+  "tpope/vim-fugitive",
   "chentoast/marks.nvim",
   "terrortylor/nvim-comment",
   "tpope/vim-surround",

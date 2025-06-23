@@ -41,18 +41,37 @@ end, { expr = false, silent = true, desc = "Accept Copilot suggestion" })
 
 vim.api.nvim_create_user_command("CopilotChatAutoCommit", function()
   require("CopilotChat").ask(
-    "Write commit message for the change with commitizen convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.",
+    "Write a commit message following the commitizen convention. Keep the title under 50 characters and the body wrapped at 72 characters. Respond only with the message, formatted as a gitcommit code block.",
     {
       context = { "git:staged" },
       callback = function(response)
-        local commit_msg = response
-          :gsub("\n", " ") -- substitui quebras de linha por espaço
-          :gsub('"', "") -- remove aspas duplas
-          :gsub("^%s*(.-)%s*$", "%1") -- remove espaços no início/fim
+        -- Remove blocos de código (```gitcommit ... ```)
+        local clean_msg = response:gsub("^```gitcommit%s*", ""):gsub("```%s*$", ""):gsub("\r", "")
 
-        vim.notify("Mensagem gerada: " .. commit_msg)
+        -- Quebra a string em linhas
+        local lines = {}
+        for line in clean_msg:gmatch("[^\n]+") do
+          table.insert(lines, line)
+        end
 
-        local result = vim.fn.system({ "git", "commit", "-m", commit_msg })
+        local title = lines[1] or ""
+        local description = table.concat(vim.list_slice(lines, 2), "\n")
+
+        -- Valida título
+        if title == "" then
+          vim.notify("Título do commit está vazio. Cancelando.", vim.log.levels.ERROR)
+          return
+        end
+
+        -- Faz o commit
+        local args = { "git", "commit", "-m", title }
+        if description and description:match("%S") then
+          table.insert(args, "-m")
+          table.insert(args, description)
+        end
+
+        vim.notify("Commit:\n" .. title .. "\n\n" .. description)
+        local result = vim.fn.system(args)
         vim.notify("Resultado do commit:\n" .. result)
       end,
     }

@@ -1,0 +1,24 @@
+-- require("llm").setup({
+--   backend = "ollama", -- backend ID, "huggingface" | "ollama" | "openai" | "tgi"
+--   model = "codellama:7b-code", -- the ecodellama:7b", odel ID, behavior depends on backend
+--   url = "http://localhost:11434", -- the http url of the backend
+--   request_body = {
+--     -- Modelfile options for the model you use
+--     options = {
+--       temperature = 0.2,
+--       top_p = 0.95,
+--     },
+--   },
+--   lsp = {
+--     bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
+--   },
+-- })
+--
+-- vim.keymap.set("i", "<Tab>", function()
+--   local llm = require("llm.completion")
+--   if llm.shown_suggestion ~= nil then
+--     llm.complete()
+--   else
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+--   end
+-- end, { desc = "Super Tab" })

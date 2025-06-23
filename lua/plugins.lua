@@ -32,31 +32,49 @@ require("lazy").setup({
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "f3fora/cmp-spell",
+      "zbirenbaum/copilot-cmp",
     },
   },
 
   -- AI
-  -- "AndreM222/copilot-lualine",
-  -- "zbirenbaum/copilot.lua",
-  "github/copilot.vim",
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    build = "make tiktoken",
+  },
+  "zbirenbaum/copilot.lua",
+  "AndreM222/copilot-lualine",
   "Exafunction/codeium.vim",
+  "huggingface/llm.nvim",
 
   -- snippets
   "rafamadriz/friendly-snippets",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
 
-  -- formatting
-  "jose-elias-alvarez/null-ls.nvim",
-
-  -- language
+  -- language and formatting
+  "neovim/nvim-lspconfig",
+  "nvimtools/none-ls.nvim",
+  "nvimtools/none-ls-extras.nvim",
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "neovim/nvim-lspconfig",
+  "jay-babu/mason-null-ls.nvim",
+  "j-hui/fidget.nvim",
 
   -- syntax
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  "jwalton512/vim-blade",
+  -- { "EmranMR/tree-sitter-blade" },
+  {
+    "andymass/vim-matchup",
+    event = { "BufReadPost" },
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      vim.g.matchup_matchpref = {
+        html = { tagnameonly = 1 },
+        blade = { tagnameonly = 1 },
+      }
+    end,
+  },
+  -- "jwalton512/vim-blade",
 
   -- utilities
   "christoomey/vim-tmux-navigator",
@@ -65,7 +83,6 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim",
   "chentoast/marks.nvim",
   "terrortylor/nvim-comment",
-  "editorconfig/editorconfig-vim",
   "tpope/vim-surround",
   "svermeulen/vim-subversive",
   "tpope/vim-repeat",
@@ -89,7 +106,7 @@ require("lazy").setup({
   "nvim-tree/nvim-tree.lua",
   "nvim-lualine/lualine.nvim",
   "liuchengxu/vista.vim",
-  "simrat39/symbols-outline.nvim",
+  -- "antosha417/nvim-lsp-file-operations",
 
   -- session
   {

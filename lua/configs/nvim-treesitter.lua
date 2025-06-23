@@ -1,26 +1,45 @@
 require("nvim-treesitter.configs").setup({
   auto_install = true,
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-  highlight = { enable = true },
+  ensure_installed = {
+    "c",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "php",
+    "javascript",
+    "typescript",
+    "html",
+    "blade",
+    "css",
+    "json",
+    "bash",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "rust",
+  },
   indent = { enable = true },
-  -- refactor = {
-  --   highlight_definitions = { enable = true },
-  -- },
-  -- autotag = {
-  --   enable = true,
-  -- },
-  -- context_commentstring = {
-  --   enable = true,
-  --   config = {
-  --     javascriptreact = {
-  --       style_element = "{/*%s*/}",
-  --     },
-  --   },
-  -- },
+  highlight = { enable = true },
+  matchup = { enable = true },
+  refactor = {
+    highlight_definitions = { enable = true },
+  },
+  autotag = {
+    enable = true,
+  },
+  context_commentstring = {
+    enable = true,
+    config = {
+      javascriptreact = {
+        style_element = "{/*%s*/}",
+      },
+    },
+  },
 })
 
 vim.filetype.add({
   pattern = {
-    [".*%.blade%.php"] = "blade",
+    [".*%.blade%.php"] = "html",
   },
 })

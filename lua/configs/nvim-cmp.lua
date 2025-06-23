@@ -28,7 +28,8 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
-    { name = "codeium" },
+    -- { name = "codeium" },
+    -- { name = "copilot" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "buffer" },
@@ -41,9 +42,10 @@ cmp.setup({
       maxwidth = 50,
       ellipsis_char = "...",
       show_labelDetails = true,
-      symbol_map = { Codeium = "" },
+      symbol_map = { Copilot = "" },
       before = function(entry, vim_item)
         vim_item.menu = ({
+          copilot = "[Copilot]",
           codeium = "[Codeium]",
           luasnip = "[LuaSnip]",
           nvim_lsp = "[LSP]",

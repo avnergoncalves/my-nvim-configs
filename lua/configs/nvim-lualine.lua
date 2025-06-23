@@ -15,7 +15,7 @@ require("lualine").setup({
   },
   sections = {
     lualine_c = { { "filename", path = 1 } },
-    lualine_x = { { codeium_statusline }, "encoding", "fileformat", "filetype" },
+    lualine_x = { "copilot", { codeium_statusline }, "encoding", "fileformat", "filetype" },
   },
   inactive_sections = {
     lualine_c = { { "filename", path = 1 } },

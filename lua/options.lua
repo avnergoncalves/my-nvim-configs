@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 
 -- settings
 vim.cmd([[
-  set noequalalways
   filetype plugin indent on
   syntax on
 ]])
@@ -19,6 +18,8 @@ vim.g.strip_whitespace_confirm = 0
 -- Trigger a highlight in the appropriate direction when pressing these keys:
 vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 vim.g.qs_max_chars = 150
+
+vim.g.editorconfig = true
 
 local set = vim.opt
 

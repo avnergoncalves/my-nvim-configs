@@ -45,10 +45,8 @@ vim.api.nvim_create_user_command("CopilotChatAutoCommit", function()
     {
       context = { "git:staged" },
       callback = function(response)
-        -- Remove blocos de código (```gitcommit ... ```)
         local clean_msg = response:gsub("^```gitcommit%s*", ""):gsub("```%s*$", ""):gsub("\r", "")
 
-        -- Quebra a string em linhas
         local lines = {}
         for line in clean_msg:gmatch("[^\n]+") do
           table.insert(lines, line)
@@ -57,22 +55,32 @@ vim.api.nvim_create_user_command("CopilotChatAutoCommit", function()
         local title = lines[1] or ""
         local description = table.concat(vim.list_slice(lines, 2), "\n")
 
-        -- Valida título
         if title == "" then
           vim.notify("Título do commit está vazio. Cancelando.", vim.log.levels.ERROR)
           return
         end
 
-        -- Faz o commit
-        local args = { "git", "commit", "-m", title }
+        -- Abrir buffer do CopilotChat com o conteúdo formatado
+        local full_commit = title
         if description and description:match("%S") then
-          table.insert(args, "-m")
-          table.insert(args, description)
+          full_commit = full_commit .. "\n\n" .. description
         end
 
-        vim.notify("Commit:\n" .. title .. "\n\n" .. description)
-        local result = vim.fn.system(args)
-        vim.notify("Resultado do commit:\n" .. result)
+        -- Exibe no buffer e aguarda <C-y> para aceitar
+        require("CopilotChat").answer("Mensagem de commit sugerida:\n\n" .. full_commit, {
+          callback = function()
+            -- Define ação do <C-y> para commitar
+            require("CopilotChat").actions.accept(function()
+              local args = { "git", "commit", "-m", title }
+              if description and description:match("%S") then
+                table.insert(args, "-m")
+                table.insert(args, description)
+              end
+              local result = vim.fn.system(args)
+              vim.notify("Resultado do commit:\n" .. result)
+            end)
+          end,
+        })
       end,
     }
   )

@@ -19,13 +19,12 @@ require("copilot").setup({
 
 require("CopilotChat").setup({
   -- See Configuration section for options
-  -- window = {
-  --   layout = "float",
-  --   relative = "cursor",
-  --   width = 1,
-  --   height = 0.4,
-  --   row = 1,
-  -- },
+  window = {
+    layout = "float",
+    relative = "editor",
+    width = math.floor(vim.o.columns * 0.3),
+    height = math.floor(vim.o.lines * 0.6),
+  },
   prompts = {
     PR = {
       prompt = "Write pull request message for the change. Keep the title under 50 characters. Format as a markdown.",

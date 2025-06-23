@@ -83,3 +83,19 @@ vim.api.nvim_create_user_command("CopilotChatAutoCommit", function()
     }
   )
 end, {})
+
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- Normal mode
+keymap("n", "<leader>cc", ":CopilotChatOpen<CR>", { desc = "Abrir chat Copilot", unpack(opts) })
+keymap("n", "<leader>cq", ":CopilotChatClose<CR>", { desc = "Fechar chat", unpack(opts) })
+keymap("n", "<leader>cl", ":CopilotChatReset<CR>", { desc = "Limpar chat", unpack(opts) })
+keymap("n", "<leader>cm", ":CopilotChatAutoCommit<CR>", { desc = "Gerar commit com Copilot", unpack(opts) })
+keymap("n", "<leader>cf", ":CopilotChatFix<CR>", { desc = "Sugerir correção", unpack(opts) })
+keymap("n", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Gerar documentação", unpack(opts) })
+
+-- Visual mode
+keymap("v", "<leader>ce", ":CopilotChatExplain<CR>", { desc = "Explicar código", unpack(opts) })
+keymap("v", "<leader>cf", ":CopilotChatFix<CR>", { desc = "Corrigir código", unpack(opts) })
+keymap("v", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Documentar código", unpack(opts) })

@@ -34,6 +34,10 @@ kmap("n", "<leader>b", builtin.buffers, opts)
 kmap("n", "<leader>h", builtin.help_tags, opts)
 kmap("n", "<leader>r", builtin.registers, opts)
 
+-- Acelerate jk
+kmap("n", "j", "<Plug>(accelerated_jk_gj)", opts)
+kmap("n", "k", "<Plug>(accelerated_jk_gk)", opts)
+
 -- Nvin tree
 map("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
 map("n", "<C-f>", ":NvimTreeFindFile<CR>", opts)

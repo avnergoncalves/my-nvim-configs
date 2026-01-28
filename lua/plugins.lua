@@ -1,4 +1,5 @@
--- install lazy
+--- @diagnostic disable: undefined-global
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -53,12 +54,13 @@ require("lazy").setup({
 
   -- language and formatting
   "neovim/nvim-lspconfig",
-  "nvimtools/none-ls.nvim",
-  "nvimtools/none-ls-extras.nvim",
+  "stevearc/conform.nvim",
+  -- "nvimtools/none-ls.nvim",
+  -- "nvimtools/none-ls-extras.nvim",
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "jay-babu/mason-null-ls.nvim",
-  "j-hui/fidget.nvim",
+  "zapling/mason-conform.nvim",
+  -- "jay-babu/mason-null-ls.nvim",
 
   -- syntax
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -77,26 +79,44 @@ require("lazy").setup({
   -- "jwalton512/vim-blade",
 
   -- utilities
+  "rainbowhxch/accelerated-jk.nvim",
   "christoomey/vim-tmux-navigator",
   "windwp/nvim-autopairs",
-  "norcalli/nvim-colorizer.lua",
-  "lewis6991/gitsigns.nvim",
   "tpope/vim-fugitive",
-  "chentoast/marks.nvim",
   "terrortylor/nvim-comment",
   "tpope/vim-surround",
   "svermeulen/vim-subversive",
   "tpope/vim-repeat",
   "tpope/vim-abolish",
-  { "linux-cultist/venv-selector.nvim", branch = "regexp" },
+  { "linux-cultist/venv-selector.nvim" },
   "onsails/lspkind.nvim",
   {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-    init = function()
-      vim.g.startuptime_tries = 10
-    end,
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = false },
+    },
   },
+  -- "j-hui/fidget.nvim",
+  -- {
+  --   "dstein64/vim-startuptime",
+  --   cmd = "StartupTime",
+  --   init = function()
+  --     vim.g.startuptime_tries = 10
+  --   end,
+  -- },
 
   -- dependencies
   "nvim-lua/plenary.nvim",
@@ -106,17 +126,11 @@ require("lazy").setup({
   -- interface
   "nvim-tree/nvim-tree.lua",
   "nvim-lualine/lualine.nvim",
-  "liuchengxu/vista.vim",
-  -- "antosha417/nvim-lsp-file-operations",
+  -- "liuchengxu/vista.vim",
+  "lewis6991/gitsigns.nvim",
+  "norcalli/nvim-colorizer.lua",
+  "chentoast/marks.nvim",
 
   -- session
-  {
-    "rmagatti/auto-session",
-    config = function()
-      require("auto-session").setup({
-        log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/Workspace", "~/Downloads", "/" },
-      })
-    end,
-  },
+  "rmagatti/auto-session",
 })

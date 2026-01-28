@@ -1,18 +1,15 @@
-local lspconfig = require("lspconfig")
---
 -- local caps = vim.lsp.protocol.make_client_capabilities()
+-- caps.textDocument.completion.completionItem.snippetSupport = true
+--
 -- local no_format = function(client, bufnr)
 --   client.server_capabilities.documentFormattingProvider = false
 -- end
 
--- Capabilities
--- caps.textDocument.completion.completionItem.snippetSupport = true
---
 -- vim.lsp.set_log_level("debug")
 
 -- Python
 vim.lsp.enable("pyright")
--- lspconfig.pyright.setup({
+-- vim.lsp.config("pyright", {
 --   capabilities = caps,
 --   on_attach = no_format,
 -- })
@@ -20,45 +17,47 @@ vim.lsp.enable("pyright")
 -- PHP
 -- vim.lsp.enable("phpactor")
 vim.lsp.enable("intelephense")
--- lspconfig.phpactor.setup({ capabilities = caps })
+-- vim.lsp.config.phpactor.setup({ capabilities = caps })
 
 -- JavaScript/Typescript
 -- vim.lsp.enable("eslint")
 vim.lsp.enable("ts_ls")
 
--- lspconfig.eslint.setup({
+-- vim.lsp.config.eslint.setup({
 --   capabilities = caps,
 --   on_attach = no_format,
 -- })
--- lspconfig.ts_ls.setup({
+-- vim.lsp.config.ts_ls.setup({
 --   capabilities = caps,
 --   on_attach = no_format,
 -- })
 
 -- Rust
 -- vim.lsp.enable("rust_analyzer")
--- lspconfig.rust_analyzer.setup({
+-- vim.lsp.config.rust_analyzer.setup({
 --   capabilities = caps,
 -- })
 
 -- Emmet
+-- @diagnostic disable: undefined-global
+
 vim.lsp.enable("emmet_ls")
-lspconfig.emmet_ls.setup({
-  filetypes = {
-    "css",
-    "html",
-    "blade",
-    "less",
-    "sass",
-    "scss",
-    "javascriptreact",
-    "typescriptreact",
-  },
-})
+-- require("lspconfig").emmet_ls.setup({
+--   filetypes = {
+--     "css",
+--     "html",
+--     "blade",
+--     "less",
+--     "sass",
+--     "scss",
+--     "javascriptreact",
+--     "typescriptreact",
+--   },
+-- })
 
 -- Lua
 vim.lsp.enable("lua_ls")
--- lspconfig.lua_ls.setup({
+-- vim.lsp.config.lua_ls.setup({
 --   capabilities = caps,
 --   on_attach = no_format,
 -- })

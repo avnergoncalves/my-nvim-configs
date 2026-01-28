@@ -36,17 +36,17 @@ require("nvim-tree").setup({
 })
 
 -- autocmd to reopen nvim-tree on restart session
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = "NvimTree_*",
-  callback = function()
-    local api = require("nvim-tree.api")
-    local view = require("nvim-tree.view")
-
-    if not view.is_visible() then
-      api.tree.open()
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufEnter" }, {
+--   pattern = "NvimTree_*",
+--   callback = function()
+--     local api = require("nvim-tree.api")
+--     local view = require("nvim-tree.view")
+--
+--     if not view.is_visible() then
+--       api.tree.open()
+--     end
+--   end,
+-- })
 
 -- autocmd to close nvim-tree when it is the only window open
 -- vim.api.nvim_create_autocmd("BufEnter", {

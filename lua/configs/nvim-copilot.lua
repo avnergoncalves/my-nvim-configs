@@ -1,6 +1,12 @@
+--- @diagnostic disable: undefined-global
+
 -- vim.g.copilot_enabled = false
 
-require("copilot").setup({
+local copilot = require("copilot")
+local copilot_chat = require("CopilotChat")
+local select = require("CopilotChat.select")
+
+copilot.setup({
   suggestion = {
     auto_trigger = true,
     suggestion = { enabled = false },
@@ -17,25 +23,30 @@ require("copilot").setup({
   },
 })
 
-require("CopilotChat").setup({
+copilot_chat.setup({
   -- See Configuration section for options
+  -- clear_chat_on_new_prompt = true,
+  -- insert_at_end = true,
+  -- remember_as_sticky = false,
   window = {
     layout = "float",
-    relative = "editor",
-    width = math.floor(vim.o.columns * 0.3),
-    height = math.floor(vim.o.lines * 0.6),
+    -- relative = "editor",
+    width = math.floor(vim.o.columns * 0.4),
+    height = math.floor(vim.o.lines * 0.8),
   },
   prompts = {
-    PR = {
-      prompt = "Write pull request message for the change. Keep the title under 50 characters. Format as a markdown.",
+    PullRequest = {
+      prompt = "Generate a Pull Request description aligned with Conventional Commits. Explain the change, its motivation, and how to validate it.",
       description = "Write pull request message",
-      context = "git:develop...HEAD",
+      sticky = { "#gitdiff:" .. vim.fn.system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'") .. "...HEAD" },
+      -- sticky = { "#git:develop...HEAD" },
     },
   },
 })
 
 -- require("copilot_cmp").setup()
 
+-- Mapeamento para aceitar sugestão do Copilot com a tecla Right Arrow
 vim.keymap.set("i", "<Right>", function()
   local copilot_suggestion = require("copilot.suggestion")
   if copilot_suggestion.is_visible() then
@@ -45,44 +56,31 @@ vim.keymap.set("i", "<Right>", function()
   end
 end, { expr = false, silent = true, desc = "Accept Copilot suggestion" })
 
-vim.api.nvim_create_user_command("CopilotChatAutoCommit", function()
-  require("CopilotChat").ask(
-    "Write a commit message following the commitizen convention. Keep the title under 50 characters and the body wrapped at 72 characters. Respond only with the message, formatted as a gitcommit code block.",
-    {
-      context = { "git:staged" },
-      callback = function(response)
-        -- Remove blocos de código (```gitcommit ... ```)
-        local clean_msg = response:gsub("^```gitcommit%s*", ""):gsub("```%s*$", ""):gsub("\r", "")
+-- Atalho para perguntar ao Copilot Chat, usando seleção ou buffer como contexto
+vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+  local function get_resource()
+    local mode = vim.fn.mode()
+    if mode == "v" or mode == "V" or mode == "\22" then
+      -- está em visual mode: usar seleção
+      return { "#selection" }, "seleção"
+    else
+      -- não tem seleção: usar buffer
+      return { "#buffer" }, "buffer"
+    end
+  end
 
-        -- Quebra a string em linhas
-        local lines = {}
-        for line in clean_msg:gmatch("[^\n]+") do
-          table.insert(lines, line)
-        end
+  local function ask_copilot(input)
+    if input and input ~= "" then
+      copilot_chat.reset()
+      local resources, _ = get_resource()
+      copilot_chat.ask(input, { sticky = resources })
+    end
+  end
 
-        local title = lines[1] or ""
-        local description = table.concat(vim.list_slice(lines, 2), "\n")
-
-        -- Valida título
-        if title == "" then
-          vim.notify("Título do commit está vazio. Cancelando.", vim.log.levels.ERROR)
-          return
-        end
-
-        -- Faz o commit
-        local args = { "git", "commit", "-m", title }
-        if description and description:match("%S") then
-          table.insert(args, "-m")
-          table.insert(args, description)
-        end
-
-        vim.notify("Commit:\n" .. title .. "\n\n" .. description)
-        local result = vim.fn.system(args)
-        vim.notify("Resultado do commit:\n" .. result)
-      end,
-    }
-  )
-end, {})
+  -- Use vim.ui.input para melhor integração com plugins de UI
+  local _, resource_label = get_resource()
+  vim.ui.input({ prompt = "Perguntar ao Copilot (" .. resource_label .. "): " }, ask_copilot)
+end, { desc = "Perguntar ao Copilot (seleção > buffer)" })
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -91,11 +89,11 @@ local opts = { noremap = true, silent = true }
 keymap("n", "<leader>cc", ":CopilotChatOpen<CR>", { desc = "Abrir chat Copilot", unpack(opts) })
 keymap("n", "<leader>cq", ":CopilotChatClose<CR>", { desc = "Fechar chat", unpack(opts) })
 keymap("n", "<leader>cl", ":CopilotChatReset<CR>", { desc = "Limpar chat", unpack(opts) })
-keymap("n", "<leader>cm", ":CopilotChatAutoCommit<CR>", { desc = "Gerar commit com Copilot", unpack(opts) })
-keymap("n", "<leader>cf", ":CopilotChatFix<CR>", { desc = "Sugerir correção", unpack(opts) })
-keymap("n", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Gerar documentação", unpack(opts) })
+keymap("n", "<leader>cm", ":CopilotChatCommit<CR>", { desc = "Gerar commit com Copilot", unpack(opts) })
+keymap("n", "<leader>cp", ":CopilotChatPullRequest<CR>", { desc = "Gerar pull request message", unpack(opts) })
 
--- Visual mode
-keymap("v", "<leader>ce", ":CopilotChatExplain<CR>", { desc = "Explicar código", unpack(opts) })
 keymap("v", "<leader>cf", ":CopilotChatFix<CR>", { desc = "Corrigir código", unpack(opts) })
+keymap("v", "<leader>ce", ":CopilotChatExplain<CR>", { desc = "Explicar código", unpack(opts) })
+keymap("v", "<leader>co", ":CopilotChatOptimize<CR>", { desc = "Otimizar código", unpack(opts) })
+keymap("v", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Revisar código", unpack(opts) })
 keymap("v", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Documentar código", unpack(opts) })

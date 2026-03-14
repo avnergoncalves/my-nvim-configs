@@ -46,6 +46,20 @@ require("lazy").setup({
   "AndreM222/copilot-lualine",
   "Exafunction/codeium.vim",
   "huggingface/llm.nvim",
+  {
+    "sudo-tee/opencode.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          anti_conceal = { enabled = false },
+          file_types = { "markdown", "opencode_output" },
+        },
+        ft = { "markdown", "Avante", "copilot-chat", "opencode_output" },
+      },
+    },
+  },
 
   -- snippets
   "rafamadriz/friendly-snippets",
@@ -64,19 +78,18 @@ require("lazy").setup({
 
   -- syntax
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  -- { "EmranMR/tree-sitter-blade" },
+  { "EmranMR/tree-sitter-blade" },
   {
     "andymass/vim-matchup",
     event = { "BufReadPost" },
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
-      vim.g.matchup_matchpref = {
-        html = { tagnameonly = 1 },
-        blade = { tagnameonly = 1 },
-      }
+      -- vim.g.matchup_matchpref = {
+      --   html = { tagnameonly = 1 },
+      --   blade = { tagnameonly = 1 },
+      -- }
     end,
   },
-  -- "jwalton512/vim-blade",
 
   -- utilities
   "rainbowhxch/accelerated-jk.nvim",
@@ -94,20 +107,6 @@ require("lazy").setup({
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    opts = {
-      bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      explorer = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      picker = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = false },
-    },
   },
   -- "j-hui/fidget.nvim",
   -- {

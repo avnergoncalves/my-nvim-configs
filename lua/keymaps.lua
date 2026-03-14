@@ -13,6 +13,9 @@ local opts = { noremap = true, silent = true }
 -- Clean highlight search
 map("n", "<leader><space>", ":noh<cr>", opts)
 
+-- Copy current file absolute path
+map("n", "<leader>yp", ":let @+ = expand('%:.')<CR>", opts)
+
 -- Move windows
 -- map("n", "<C-J>", "<C-W><C-J>", opts)
 -- map("n", "<C-K>", "<C-W><C-K>", opts)
@@ -46,6 +49,14 @@ map("n", "<C-f>", ":NvimTreeFindFile<CR>", opts)
 map("n", "s", "<plug>(SubversiveSubstitute)", opts)
 map("x", "p", "<plug>(SubversiveSubstitute)", opts)
 map("x", "P", "<plug>(SubversiveSubstitute)", opts)
+
+-- Keep visual selection while indenting
+map("v", ">", ">gv", opts)
+map("v", "<", "<gv", opts)
+
+-- Indent current line in normal mode
+map("n", ">", ">>", opts)
+map("n", "<", "<<", opts)
 
 -- LuaSnip
 local ls = require("luasnip")

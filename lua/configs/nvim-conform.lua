@@ -1,5 +1,7 @@
+--- @diagnostic disable: undefined-global
+
 require("conform").setup({
-  -- log_level = vim.log.levels.DEBUG,
+  log_level = vim.log.levels.DEBUG,
   format_on_save = {
     timeout_ms = 2000,
     lsp_fallback = false,
@@ -9,6 +11,7 @@ require("conform").setup({
     python = { "autoflake", "isort", "black" },
     javascript = { "prettierd" },
     php = { "php-cs-fixer" },
+    blade = { "blade-formatter" },
   },
   formatters = {
     autoflake = {

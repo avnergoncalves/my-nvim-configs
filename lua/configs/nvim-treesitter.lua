@@ -1,3 +1,5 @@
+--- @diagnostic disable: undefined-global
+
 require("nvim-treesitter.configs").setup({
   auto_install = true,
   ensure_installed = {
@@ -40,6 +42,6 @@ require("nvim-treesitter.configs").setup({
 
 vim.filetype.add({
   pattern = {
-    [".*%.blade%.php"] = "html",
+    [".*%.blade%.php"] = "blade",
   },
 })

@@ -77,24 +77,25 @@ require("lazy").setup({
   -- "jay-babu/mason-null-ls.nvim",
 
   -- syntax
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  { "EmranMR/tree-sitter-blade" },
-  {
-    "andymass/vim-matchup",
-    event = { "BufReadPost" },
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-      -- vim.g.matchup_matchpref = {
-      --   html = { tagnameonly = 1 },
-      --   blade = { tagnameonly = 1 },
-      -- }
-    end,
-  },
+  "romus204/tree-sitter-manager.nvim",
+
+  -- { "EmranMR/tree-sitter-blade" },
+  -- {
+  --   "andymass/vim-matchup",
+  --   event = { "BufReadPost" },
+  --   config = function()
+  --     vim.g.matchup_matchparen_offscreen = {}
+  --     vim.g.matchup_matchpref = {
+  --       html = { tagnameonly = 1 },
+  --       blade = { tagnameonly = 1 },
+  --     }
+  --   end,
+  -- },
 
   -- utilities
   "rainbowhxch/accelerated-jk.nvim",
   "christoomey/vim-tmux-navigator",
-  "windwp/nvim-autopairs",
+  -- "windwp/nvim-autopairs",
   "tpope/vim-fugitive",
   "terrortylor/nvim-comment",
   "tpope/vim-surround",
@@ -132,4 +133,8 @@ require("lazy").setup({
 
   -- session
   "rmagatti/auto-session",
+}, {
+  checker = {
+    enabled = true,
+  },
 })

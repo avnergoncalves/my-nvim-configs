@@ -2,6 +2,15 @@ function codeium_statusline()
   return "{…} " .. string.gsub(vim.api.nvim_call_function("codeium#GetStatusString", {}), "%s+", "")
 end
 
+local function lazy_updates()
+  local ok, lazy_status = pcall(require, "lazy.status")
+  if not ok or not lazy_status.has_updates() then
+    return ""
+  end
+
+  return lazy_status.updates()
+end
+
 local colors = {
   color2 = "#0f1419",
   color3 = "#ffee99",
@@ -50,7 +59,8 @@ require("lualine").setup({
   },
   sections = {
     lualine_c = { { "filename", path = 1 } },
-    lualine_x = { "copilot", { codeium_statusline }, "encoding", "fileformat", "filetype" },
+    -- lualine_x = { "copilot", { codeium_statusline }, { lazy_updates }, "encoding", "fileformat", "filetype" },
+    lualine_x = { "copilot", { lazy_updates }, "encoding", "fileformat", "filetype" },
   },
   inactive_sections = {
     lualine_c = { { "filename", path = 1 } },

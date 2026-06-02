@@ -60,5 +60,6 @@ set.listchars:append({ precedes = "«" })
 set.listchars:append({ extends = "»" })
 set.list = true
 
-set.foldexpr = "nvim_treesitter#foldexpr()"
 set.foldmethod = "manual"
+set.autoindent = true
+set.smartindent = true

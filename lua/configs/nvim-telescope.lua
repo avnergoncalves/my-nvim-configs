@@ -8,6 +8,7 @@ require("telescope").setup({
   },
   defaults = {
     path_display = { "filename_first" },
+    hidden = true,
     mappings = {
       i = {
         ["<esc>"] = actions.close,

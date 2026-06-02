@@ -1,3 +1,5 @@
+--- @diagnostic disable: undefined-global
+
 local api = require("opencode.api")
 local feed_keys
 
@@ -45,6 +47,13 @@ end
 require("opencode").setup({
   preferred_picker = "telescope",
   preferred_completion = "nvim-cmp",
+  context = {
+    diagnostics = {
+      info = false,
+      warning = false,
+      error = false,
+    },
+  },
   keymap = {
     input_window = {
       ["<up>"] = {
